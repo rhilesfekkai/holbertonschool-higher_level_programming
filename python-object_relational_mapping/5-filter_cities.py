@@ -23,8 +23,7 @@ def main():
         (sys.argv[4],)
     )
     cities = cur.fetchall()
-    if cities:
-        print(", ".join(city[0] for city in cities))
+    print(", ".join(city[0] for city in cities))
 
     cur.close()
     db.close()
