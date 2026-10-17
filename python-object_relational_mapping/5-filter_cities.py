@@ -18,13 +18,13 @@ def main():
     cur = db.cursor()
     cur.execute(
         "SELECT cities.name FROM cities "
-        "JOIN states ON cities.state_id = states.id "
+        "INNER JOIN states ON cities.state_id = states.id "
         "WHERE states.name = %s ORDER BY cities.id ASC",
         (sys.argv[4],)
     )
-    rows = cur.fetchall()
-    if rows:
-        print(", ".join(row[0] for row in rows))
+    cities = cur.fetchall()
+    if cities:
+        print(", ".join(city[0] for city in cities))
 
     cur.close()
     db.close()
