@@ -10,7 +10,7 @@ def main():
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
-    state_name = sys.argv[4].replace("\\", "\\\\").replace("'", "\\'")
+    state_name = sys.argv[4]
 
     db = MySQLdb.connect(
         host="localhost",
@@ -21,9 +21,10 @@ def main():
         charset="utf8"
     )
     cur = db.cursor()
-    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(
-        state_name
-    )
+    query = (
+        "SELECT * FROM states WHERE BINARY name = BINARY '{}'"
+        " ORDER BY id ASC"
+    ).format(state_name.replace("\\", "\\\\").replace("'", "\\'"))
     cur.execute(query)
 
     for row in cur.fetchall():
