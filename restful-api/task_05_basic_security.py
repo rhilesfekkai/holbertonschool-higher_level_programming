@@ -105,7 +105,7 @@ def expired_token(jwt_header, jwt_payload):
 @jwt_required()
 def jwt_protected():
     """Protected route requiring a valid JWT."""
-    return jsonify({"message": "JWT Auth: Access Granted"}), 200
+    return "JWT Auth: Access Granted", 200
 
 
 @app.route("/admin-only", methods=["GET"])
